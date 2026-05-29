@@ -1,9 +1,21 @@
 import express from 'express'
-import { configDotenv } from 'dotenv';
+import dotenv from 'dotenv';
+dotenv.config()
+
 const app = express()
 
-configDotenv();
+const port = process.env.PORT || 3000
+
+app.get('/health', (req, res) => {
+  console.log('backend working')
+  res.send('backend is working.')
+})
 
 
-const port = process.env.PORT;
-console.log(port)
+app.listen(port, () => {
+  console.log(`backend listening to the ${port}`);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught error:', err);
+});
