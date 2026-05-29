@@ -3,6 +3,7 @@ dotenv.config()
 
 import express from 'express'
 import { dbConnection } from './configs/db.js';
+import userRoute from './routes/user.route.js'
 
 const app = express()
 
@@ -12,6 +13,8 @@ app.get('/health', (req, res) => {
   console.log('backend working')
   res.send('backend is working.')
 })
+
+app.use('/api/v1/', userRoute)
 
 
 app.listen(port, () => {
