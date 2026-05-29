@@ -1,6 +1,8 @@
-import express from 'express'
 import dotenv from 'dotenv';
 dotenv.config()
+
+import express from 'express'
+import { dbConnection } from './configs/db.js';
 
 const app = express()
 
@@ -14,6 +16,7 @@ app.get('/health', (req, res) => {
 
 app.listen(port, () => {
   console.log(`backend listening to the ${port}`);
+  dbConnection();
 });
 
 process.on('uncaughtException', (err) => {
